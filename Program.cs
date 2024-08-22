@@ -3,4 +3,5 @@ ConsoleKey k = Console.ReadKey().Key;
 Console.WriteLine();
 if (k == ConsoleKey.A)
     Ani.Convert();
-Cur.Convert();
+else
+    Cur.Convert();

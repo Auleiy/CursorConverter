@@ -2,12 +2,23 @@ using System.Drawing;
 
 public static class Cur
 {
-    /// <summary>
-    /// Convert the bitmap into the cur data.
-    /// </summary>
-    /// <param name="buffer">Buffer</param>
-    /// <param name="input">Input bitmap</param>
-    /// <returns>Data length</returns>
+    public static void Convert()
+    {
+        Console.Write("输入位置: ");
+        string inputPath = Console.ReadLine();
+        Console.Write("输出位置: ");
+        string outputPath = Console.ReadLine();
+        Console.Write("热点X: ");
+        ushort hotspotX = ushort.Parse(Console.ReadLine());
+        Console.Write("热点Y: ");
+        ushort hotspotY = ushort.Parse(Console.ReadLine());
+
+        int len = GetData(out byte[] b, (Bitmap)Image.FromFile(inputPath), hotspotX, hotspotY);
+        byte[] val = b[..len];
+        Console.WriteLine(len);
+        File.WriteAllBytes(outputPath, val);
+    }
+
     public static int GetData(out byte[] buffer, Bitmap input, int hotspotX = 0, int hotspotY = 0)
     {
         BinaryWriter bw = new(new MemoryStream());
